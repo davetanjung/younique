@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('analyzer_request_cloth', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('clothing_id');
+            $table->foreign('clothing_id')->references('id')->on('clothes')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('analyzer_request_id');
+            $table->foreign('analyzer_request_id')->references('id')->on('analyzer_requests')->onDelete('cascade')->onUpdate('cascade');            
             $table->timestamps();
         });
     }
