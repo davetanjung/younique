@@ -61,7 +61,7 @@
         {{-- end about --}}
 
         {{-- subscription plan --}}
-        <div class="relative flex w-full  mx-auto bg-[#FFEDD7] items-start justify-evenly">  
+        <div class="relative flex w-full mx-auto bg-[#FFEDD7] items-start justify-evenly">  
           <div class="flex flex-col justify-center items-center gap-12">
             <span class="py-12 px-20 bg-[#F3D4B5] text-[#232323] shadow-xl rounded-3xl text-3xl">Premi<span class="underline decoration-[#BB8A5F] underline-offset-4">um</span></span>  
             <span class="text-black font-bold text-3xl">Rp20k/month</span>   
@@ -134,7 +134,7 @@
          {{-- end subscription plan --}}     
 
          {{-- form --}}
-        <section class="relative w-full bg-[#FFEDD7] flex items-center justify-center px-6">
+        <section class="relative w-full bg-[#FFEDD7] flex items-center justify-center px-6 py-12 md:py-24">
           <div class="flex flex-col md:flex-row items-center justify-between gap-12 max-w-6xl w-full">
             
             <div class="max-w-xl text-center md:text-left">
@@ -157,6 +157,7 @@
         </section>
 {{-- end form --}}
 
+
+
     </div>
 @endsection
-,
