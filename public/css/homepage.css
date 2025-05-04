@@ -12,16 +12,14 @@
     }
 }
 
-@keyframes fadeInFromBlack {
+/* @keyframes fadeInFromBlack {
     0% {
         opacity: 0.8;
-        background-color: black;
     }
     100% {
         opacity: 1;
-        background-color: transparent;
     }
-}
+} */
 @keyframes slideX {
     0% {
       transform: translateX(0);
@@ -38,9 +36,9 @@
     animation: slideX 0.6s ease-in-out infinite;
   }
 
-#home-container {
+/* #home-container {
     animation: fadeInFromBlack 2s ease-out forwards;
-}
+} */
 
 .welcome-text-container {
     animation: fadeInUp 1.5s ease-out forwards;
