@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Form;
+
 
 class HomeController extends Controller
 {
@@ -24,11 +26,20 @@ class HomeController extends Controller
 
     public function post(Request $request)
     {
-        // Handle the form submission
-        $data = $request->all();
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:forms,email',
+            'phone' => 'required|string|max:20',        
+        ]);
+
+        $form = Form::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+        ]);
 
         // Process the data as needed
-        return redirect()->route('home')->with('success', 'Form submitted successfully!');
+        return redirect()->route('home.index')->with('success', 'Form submitted successfully!');
     }
 
     /**

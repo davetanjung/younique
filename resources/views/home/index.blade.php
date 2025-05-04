@@ -136,7 +136,6 @@
          {{-- form --}}
         <section class="relative w-full bg-[#FFEDD7] flex items-center justify-center px-6 py-12 md:py-24">
           <div class="flex flex-col md:flex-row items-center justify-between gap-12 max-w-6xl w-full">
-            
             <div class="max-w-xl text-center md:text-left">
               <h2 class="text-2xl font-bold text-[#573100] mb-4">We're still in early access!</h2>
               <p class="text-[#573100] text-lg">
@@ -144,15 +143,35 @@
                 If you're interested, please fill out this form so you won’t miss our next update!
               </p>
             </div>
-
-            <form action="" method="POST" class="bg-white shadow-lg rounded-2xl p-6 w-full max-w-md flex flex-col gap-4">
+            @if (session('success'))
+              <!-- Modal -->
+              <div id="success-modal" class="fixed inset-0 bg-gray-700/60 flex justify-center items-center z-50">
+                  <div class="bg-green-100 text-green-800 p-6 rounded-lg shadow-lg max-w-xs w-full animate__animated animate__fadeIn">
+                      <div class="flex justify-between items-center">
+                          <span class="font-semibold text-lg">Form succesfully submitted!</span>
+                          <button id="close-modal" class="text-gray-600">&times;</button>
+                      </div>
+                      <p>{{ session('success') }}</p>
+                  </div>
+              </div>
+            @endif
+   
+            <form action="{{ route('home.post') }}" method="POST"  class="bg-white shadow-lg rounded-2xl p-6 w-full max-w-md flex flex-col gap-4">
               @csrf
-              <input type="text" name="name" placeholder="Name" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#BB8A5F]">
-              <input type="email" name="email" placeholder="Email" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#BB8A5F]">
-              <input type="text" name="phone" placeholder="Phone Number" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#BB8A5F]">
+              <input type="text" name="name" value="{{ old('name') }}" placeholder="Name" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#BB8A5F]">
+              <input type="email" name="email" value="{{ old('email') }}" placeholder="Email" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#BB8A5F]">
+              <input type="text" name="phone" value="{{ old('phone') }}" placeholder="Phone Number" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#BB8A5F]">         
+              @if ($errors->any())
+              <div class="bg-red-100 text-red-800 p-4 rounded mb-4">
+                  <ul class="list-disc pl-5">
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif     
               <button type="submit" class="bg-[#573100] text-[#FFEDD7] text-sm font-semibold py-2 px-4 rounded-full hover:bg-[#6D3A00] transition-all">Join Now</button>
-            </form>
-
+            </form>           
           </div>
         </section>
 {{-- end form --}}
@@ -160,4 +179,24 @@
 
 
     </div>
+@endsection
+
+@section('script')
+<script>
+
+  document.addEventListener("DOMContentLoaded", function() {
+
+      const modal = document.getElementById('success-modal');
+      const closeModal = document.getElementById('close-modal');
+
+      setTimeout(() => {
+          modal.style.display = 'none';
+      }, 3000);
+
+      closeModal.addEventListener('click', function() {
+          modal.style.display = 'none';
+      });
+  });
+</script>
+
 @endsection
