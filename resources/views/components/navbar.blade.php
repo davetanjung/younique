@@ -9,8 +9,14 @@
 
             <!-- Desktop Menu -->
             <div class="hidden md:flex items-center space-x-10 px-4 w-1/3">
-                <a href="/" class="text-gray-700 hover:text-gray-900 font-bold">Home</a>
-                <a href="/planner" class="text-gray-700 hover:text-gray-900 font-bold">Planner</a>
+                <a href="/"
+                class="relative text-gray-700 hover:text-gray-900 font-bold after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-gray-700 after:w-0 after:transition-all after:duration-500 hover:after:w-full {{ request()->routeIs('home.*') ? 'after:w-full' : '' }}">
+                Home
+             </a>  
+                <a href="/planner"
+                class="relative text-gray-700 hover:text-gray-900 font-bold after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-gray-700 after:w-0 after:transition-all after:duration-500 hover:after:w-full {{ request()->routeIs('planner.*') ? 'after:w-full' : '' }}">
+                Planner
+             </a>             
                 <a href="/e-wardrobe" class="text-gray-700 hover:text-gray-900 font-bold">E-wardrobe</a>
                 <a href="/analyzer" class="text-gray-700 hover:text-gray-900 font-bold">Analyzer</a>
             </div>
@@ -34,8 +40,8 @@
 
             <!-- Mobile Menu (hidden by default) -->
             <div id="mobile-menu" class="hidden absolute top-20 right-4 bg-white rounded-lg shadow-lg p-4 space-y-4 md:hidden">
-                <a href="/" class="block text-gray-700 hover:text-gray-900 font-medium">Home</a>
-                <a href="/planner" class="block text-gray-700 hover:text-gray-900 font-medium">Planner</a>
+                <a href="/" class="block text-gray-700 hover:text-gray-900 font-medium {{ request()->routeIs('home') ? 'underline' : '' }}">Home</a>
+                <a href="/planner" class="block text-gray-700 hover:text-gray-900 font-medium {{ request()->routeIs('planner') ? 'underline' : '' }} ">Planner</a>
                 <a href="/e-wardrobe" class="block text-gray-700 hover:text-gray-900 font-medium">E-wardrobe</a>
                 <a href="/analyzer" class="block text-gray-700 hover:text-gray-900 font-medium">Analyzer</a>
             </div>
