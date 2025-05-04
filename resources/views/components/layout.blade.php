@@ -31,6 +31,7 @@
     <main class="flex flex-col items-center">
         @yield('content')
     </main>
+    @include('components.footer')
 </body>
 
 </html>
