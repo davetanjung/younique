@@ -19,11 +19,8 @@ class PlannerSeeder extends Seeder
     {
         $guestId = session()->getId();
 
-        // $tops = Cloth::where('type', 'top')->whereNull('guest_id')->get();
-        // $bottoms = Cloth::where('type', 'bottom')->whereNull('guest_id')->get();
         $tops = Cloth::where('type', 'top')->get();
-$bottoms = Cloth::where('type', 'bottom')->get();
-
+        $bottoms = Cloth::where('type', 'bottom')->get();
 
         if ($tops->isEmpty() || $bottoms->isEmpty()) {
             $this->command->warn('Not enough tops or bottoms to generate outfits.');
@@ -33,8 +30,8 @@ $bottoms = Cloth::where('type', 'bottom')->get();
         $outfits = collect();
 
         for ($i = 0; $i < 5; $i++) {
-            $top = $tops->random();
-            $bottom = $bottoms->random();
+            // $top = $tops->random();
+            // $bottom = $bottoms->random();
 
             $outfit = Outfit::create([
                 'guest_id' => $guestId,
@@ -42,10 +39,10 @@ $bottoms = Cloth::where('type', 'bottom')->get();
                 'is_generated' => true,
             ]);
 
-            DB::table('clothing_outfits')->insert([
-                ['outfit_id' => $outfit->id, 'clothing_id' => $top->id],
-                ['outfit_id' => $outfit->id, 'clothing_id' => $bottom->id],
-            ]);
+            // DB::table('clothing_outfits')->insert([
+            //     ['outfit_id' => $outfit->id, 'clothing_id' => $top->id],
+            //     ['outfit_id' => $outfit->id, 'clothing_id' => $bottom->id],
+            // ]);
 
             $outfits->push($outfit);
         }
@@ -65,7 +62,7 @@ $bottoms = Cloth::where('type', 'bottom')->get();
                     'occasion' => 'Auto-generated',
                     'notes' => 'Mix & matched outfit for the day.',
                 ]
-            );            
+            );
         }
     }
 }

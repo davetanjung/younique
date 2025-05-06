@@ -1,12 +1,5 @@
 <footer class="w-full bg-[#F9FAFB] py-8">
-    <div class="container mx-auto text-center flex justify-center items-center gap-7">
-        <div class="flex flex-col items-center">
-            <p class="text-gray-700">© 2025 Younique. All rights reserved.</p>
-            <div class="flex justify-center space-x-4 mt-2">
-                <a href="#" class="text-gray-700 hover:text-gray-900">Privacy Policy</a>
-                <a href="#" class="text-gray-700 hover:text-gray-900">Terms of Service</a>
-            </div>
-        </div>
+    <div class="container mx-auto text-center flex justify-center items-center gap-7">        
         <a href="/" class="">
             <svg width="252" height="86" viewBox="0 0 252 86" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="252" height="86" fill="url(#pattern0_44_2)"/>
@@ -18,5 +11,12 @@
                 </defs>
                 </svg>                
         </a>
+        <div class="flex flex-col items-center">
+            <p class="text-gray-700">© 2025 Younique. All rights reserved.</p>
+            <div class="flex justify-center space-x-4 mt-2">
+                <a href="#" class="text-gray-700 hover:text-gray-900">Privacy Policy</a>
+                <a href="#" class="text-gray-700 hover:text-gray-900">Terms of Service</a>
+            </div>
+        </div>
     </div>
 </footer>

@@ -13,7 +13,7 @@
                     Younique</span></span>
             <button
                 class="group mt-10 p-3 rounded-2xl bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all duration-300 flex items-center text-2xl gap-2">
-                <span>Get Started</span>
+                <a href="{{ route('cloth.index') }}">Get Started</a>
                 <svg class="transition-transform" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path d="M5 12H19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     <path d="M12 5L19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round"
@@ -61,7 +61,35 @@
         {{-- end about --}}
 
         {{-- subscription plan --}}
-        <div class="relative flex w-full mx-auto bg-[#FFEDD7] items-start justify-evenly">  
+        <div class="relative flex w-full mx-auto bg-[#FFEDD7] items-start justify-evenly">
+          <div class="flex flex-col justify-center items-center gap-12">
+            <span class="py-12 px-20 bg-[#F3D4B5] text-[#232323] shadow-xl rounded-3xl text-3xl">Fr<span class="underline decoration-[#BB8A5F] underline-offset-4">ee</span></span>  
+            <span class="text-[#FFEDD7] font-bold text-3xl">----</span>   
+            <div class="flex flex-col py-3 px-8 bg-white rounded-2xl shadow-xl gap-4 w-full">              
+              <div class="flex flex-wrap items-center max-w-full gap-2">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M33 16.62V18C32.9982 21.2346 31.9508 24.382 30.014 26.9727C28.0773 29.5634 25.3549 31.4587 22.253 32.3758C19.1511 33.293 15.8359 33.1828 12.8017 32.0619C9.76752 30.9409 7.17698 28.8691 5.41644 26.1556C3.6559 23.442 2.81969 20.2321 3.03252 17.0045C3.24534 13.7768 4.49581 10.7045 6.59742 8.24559C8.69903 5.78671 11.5392 4.07305 14.6943 3.3602C17.8494 2.64734 21.1504 2.97349 24.105 4.28998" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M33 6L18 21.015L13.5 16.515" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                <span class="">Wardrobe digitization (up to 30 items)</span>                   
+              </div>   
+              <div class="flex flex-wrap items-center w-full gap-2">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M33 16.62V18C32.9982 21.2346 31.9508 24.382 30.014 26.9727C28.0773 29.5634 25.3549 31.4587 22.253 32.3758C19.1511 33.293 15.8359 33.1828 12.8017 32.0619C9.76752 30.9409 7.17698 28.8691 5.41644 26.1556C3.6559 23.442 2.81969 20.2321 3.03252 17.0045C3.24534 13.7768 4.49581 10.7045 6.59742 8.24559C8.69903 5.78671 11.5392 4.07305 14.6943 3.3602C17.8494 2.64734 21.1504 2.97349 24.105 4.28998" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M33 6L18 21.015L13.5 16.515" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span class="">Outfit calendar</span>                                          
+              </div>  
+              <div class="flex flex-wrap items-center w-full gap-2">
+                <svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M19.5 35.75C28.4746 35.75 35.75 28.4746 35.75 19.5C35.75 10.5254 28.4746 3.25 19.5 3.25C10.5254 3.25 3.25 10.5254 3.25 19.5C3.25 28.4746 10.5254 35.75 19.5 35.75Z" stroke="#FF0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M24.375 14.625L14.625 24.375" stroke="#F71616" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M14.625 14.625L24.375 24.375" stroke="#F71616" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>                  
+                  <span class="">Free consultation with stylist</span>                     
+              </div>
+              </div>              
+          </div> 
           <div class="flex flex-col justify-center items-center gap-12">
             <span class="py-12 px-20 bg-[#F3D4B5] text-[#232323] shadow-xl rounded-3xl text-3xl">Premi<span class="underline decoration-[#BB8A5F] underline-offset-4">um</span></span>  
             <span class="text-black font-bold text-3xl">Rp20k/month</span>   
@@ -105,7 +133,7 @@
                   <path d="M33 16.62V18C32.9982 21.2346 31.9508 24.382 30.014 26.9727C28.0773 29.5634 25.3549 31.4587 22.253 32.3758C19.1511 33.293 15.8359 33.1828 12.8017 32.0619C9.76752 30.9409 7.17698 28.8691 5.41644 26.1556C3.6559 23.442 2.81969 20.2321 3.03252 17.0045C3.24534 13.7768 4.49581 10.7045 6.59742 8.24559C8.69903 5.78671 11.5392 4.07305 14.6943 3.3602C17.8494 2.64734 21.1504 2.97349 24.105 4.28998" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   <path d="M33 6L18 21.015L13.5 16.515" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
-                <span class="">Wardrobe digitization (up to 100 items)</span>                   
+                <span class="">Unlimited Wardrobe digitization</span>                   
               </div>   
               <div class="flex flex-wrap items-center w-full gap-2">
                 <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -184,6 +212,8 @@
 @section('script')
 <script>
 
+  
+
   document.addEventListener("DOMContentLoaded", function() {
 
       const modal = document.getElementById('success-modal');
@@ -197,6 +227,8 @@
           modal.style.display = 'none';
       });
   });
+
+
 </script>
 
 @endsection

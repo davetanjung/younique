@@ -17,7 +17,7 @@
                 class="relative text-gray-700 hover:text-gray-900 font-bold after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-gray-700 after:w-0 after:transition-all after:duration-500 hover:after:w-full {{ request()->routeIs('planner.*') ? 'after:w-full' : '' }}">
                 Planner
              </a>             
-                <a href="/e-wardrobe" class="text-gray-700 hover:text-gray-900 font-bold">E-wardrobe</a>
+                <a href="/myclothes" class="relative text-gray-700 hover:text-gray-900 font-bold after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-gray-700 after:w-0 after:transition-all after:duration-500 hover:after:w-full {{ request()->routeIs('cloth.*') ? 'after:w-full' : '' }}">My Clothes</a>
                 <a href="/analyzer" class="text-gray-700 hover:text-gray-900 font-bold">Analyzer</a>
             </div>
 

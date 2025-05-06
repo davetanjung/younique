@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 use App\Models\Planner;
 use App\Models\Outfit;
 use App\Models\Cloth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Str;
 
 class PlannerController extends Controller
 {
@@ -17,7 +19,13 @@ class PlannerController extends Controller
     public function index()
     {
         $currentDate = date('m-d');
-        $guestId = session()->getId();
+        $userId = Auth::check() ? Auth::id() : null;
+        $guestId = session()->get('guest_id');
+
+        if (!$userId && !$guestId) {
+            $guestId = Str::uuid()->toString();
+            session()->put('guest_id', $guestId);
+        }
         $plannerEntries = Planner::with('outfit.clothes')
             ->where('guest_id', $guestId)
             ->get();
@@ -33,7 +41,8 @@ class PlannerController extends Controller
         $startDate = Carbon::createFromDate($year, $month, 1)->startOfMonth();
         $endDate = $startDate->copy()->endOfMonth();
 
-        $guestId = session()->getId();
+        // FIX: Use consistent guest_id method - from session storage, not session ID
+        $guestId = session()->get('guest_id');
 
         // Check if planner entries exist for this month and guest
         $existingEntries = Planner::where('guest_id', $guestId)
@@ -42,118 +51,116 @@ class PlannerController extends Controller
 
         // If no entries exist, generate them
         if ($existingEntries === 0) {
-            $this->generateMonthlyOutfits($guestId, $startDate, $endDate);
+            $this->generateOutfitsForMonth($guestId, $startDate, $endDate);
         }
 
         $plannerEntries = Planner::with(['outfit.clothes']) // Eager load relationships
-        ->where('guest_id', $guestId)
-        ->whereBetween('date', [$startDate->toDateString(), $endDate->toDateString()])
-        ->orderBy('date', 'asc') // Optional, but good practice
-        ->get() // Get the results as a collection first
-        ->keyBy(function ($item) { // <--- THIS IS THE IMPORTANT PART
-            // Use Carbon to ensure the date from the DB is formatted correctly
-            // The return value of this function becomes the key in the final object
-            return Carbon::parse($item->date)->toDateString(); // Format as 'YYYY-MM-DD'
-        });
+            ->where('guest_id', $guestId)
+            ->whereBetween('date', [$startDate->toDateString(), $endDate->toDateString()])
+            ->orderBy('date', 'asc')
+            ->get()
+            ->keyBy(function ($item) {
+                return Carbon::parse($item->date)->toDateString();
+            });
 
         return response()->json($plannerEntries);
     }
 
     /**
-     * Generate outfit combinations by category for the whole month
-     * Randomly mixes clothing items to create varied outfit combinations
+     * Handle the request to generate monthly outfits (HTTP endpoint)
      */
-    private function generateMonthlyOutfits($guestId, $startDate, $endDate)
+    public function generateMonthlyOutfits(Request $request)
     {
-        // Get all clothes by category for this guest - with mixing enabled
-        $casual = $this->getClothesByCategoryAndType($guestId, 'casual', true);
-        $formal = $this->getClothesByCategoryAndType($guestId, 'formal', true);
-        $sportswear = $this->getClothesByCategoryAndType($guestId, 'sportswear', true);
-        $business = $this->getClothesByCategoryAndType($guestId, 'business', true);
-        $nightwear = $this->getClothesByCategoryAndType($guestId, 'nightwear', true);
+        try {
+            // Validate incoming request
+            $validated = $request->validate([
+                'month' => 'required|integer|between:1,12',
+                'year' => 'required|integer|between:2000,2050',
+                'guest_id' => 'required|string'
+            ]);
 
-        // Get all available clothes for random mixing
-        $allTops = Cloth::where('type', 'top')
-            ->where(function ($query) use ($guestId) {
-                $query->where('guest_id', $guestId)
-                    ->orWhereNull('guest_id');
-            })
-            ->get();
+            $month = $request->input('month');
+            $year = $request->input('year');
+            $guestId = $request->input('guest_id');
 
-        $allBottoms = Cloth::where('type', 'bottom')
-            ->where(function ($query) use ($guestId) {
-                $query->where('guest_id', $guestId)
-                    ->orWhereNull('guest_id');
-            })
-            ->get();
+            // IMPORTANT: Changed this comparison to use the guest_id from session
+            // instead of session()->getId() which was causing the 403 error
+            if ($guestId !== session()->get('guest_id')) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Invalid session. Please refresh the page and try again.'
+                ], 403);
+            }
 
-        // Prepare clothesByCategory with options for mixing
-        $clothesByCategory = [
-            'casual' => $casual,
-            'formal' => $formal,
-            'sportswear' => $sportswear,
-            'business' => $business,
-            'nightwear' => $nightwear,
-            // Add a mixed category that combines all clothing items
-            'mixed' => [
-                'tops' => $allTops,
-                'bottoms' => $allBottoms
-            ]
-        ];
+            $startDate = Carbon::createFromDate($year, $month, 1)->startOfMonth();
+            $endDate = $startDate->copy()->endOfMonth();
 
-        // Track used combinations to avoid repeats
-        $usedCombinations = [];
+            // First, clear existing entries for this month
+            Planner::where('guest_id', $guestId)
+                ->whereBetween('date', [$startDate->toDateString(), $endDate->toDateString()])
+                ->delete();
 
-        // Generate outfits for each day of the month
+            // Then generate new outfits - Call the private helper method now
+            $this->generateOutfitsForMonth($guestId, $startDate, $endDate);
+
+            // Count of generated outfits
+            $generatedCount = Planner::where('guest_id', $guestId)
+                ->whereBetween('date', [$startDate->toDateString(), $endDate->toDateString()])
+                ->count();
+
+            return response()->json([
+                'success' => true,
+                'message' => "Successfully generated {$generatedCount} outfits for {$startDate->format('F Y')}",
+                'count' => $generatedCount
+            ]);
+
+        } catch (\Exception $e) {
+            \Log::error('Error generating monthly outfits: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred while generating outfits: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * Private helper method to generate outfits for a month
+     * This is the implementation of the logic, separated from the HTTP endpoint
+     */
+    private function generateOutfitsForMonth($guestId, $startDate, $endDate)
+    {
         $currentDate = $startDate->copy();
+
         while ($currentDate <= $endDate) {
-            // Determine category based on day of week
             $dayOfWeek = $currentDate->dayOfWeek;
 
-            // Monday-Friday: Business/Formal, Saturday: Casual, Sunday: Sportswear
-            $category = 'casual'; // Default
+            $category = 'casual';
+
             if ($dayOfWeek >= 1 && $dayOfWeek <= 5) {
-                // Weekdays
+                // Weekdays (Monday=1 to Friday=5)
                 $category = ($dayOfWeek % 2 == 0) ? 'business' : 'formal';
             } elseif ($dayOfWeek == 6) {
                 // Saturday
                 $category = 'casual';
             } else {
-                // Sunday
+                // Sunday (0)
                 $category = 'sportswear';
             }
 
-            // If it's last day of month, use nightwear
-            if ($currentDate->day === $endDate->day) {
-                $category = 'nightwear';
-            }
+            // Get clothes by category
+            $clothes = $this->getClothesByCategoryAndType($guestId, $category, true);
 
-            // Every few days, use completely mixed outfits regardless of category
-            if ($currentDate->day % 5 == 0) {
-                $category = 'mixed';
-            }
+            // Create new outfit
+            $outfit = $this->createOutfit($guestId, $category, $clothes);
 
-            // Determine which clothes collection to use
-            $clothesCollection = $clothesByCategory[$category];
-
-            // Check if we can create a valid outfit
-            if (
-                !empty($clothesCollection['tops']) &&
-                !empty($clothesCollection['bottoms'])
-            ) {
-                // Generate a unique outfit for this date
-                $outfit = $this->createOutfit($guestId, $category, $clothesCollection);
-
-                // Create planner entry
-                Planner::updateOrCreate(
-                    ['guest_id' => $guestId, 'date' => $currentDate->format('Y-m-d')],
-                    [
-                        'outfit_id' => $outfit->id,
-                        'occasion' => $category === 'mixed' ? 'Mixed Style' : ucfirst($category) . ' day',
-                        'notes' => 'Auto-generated ' . $category . ' outfit'
-                    ]
-                );
-            }
+            // Create planner entry
+            Planner::create([
+                'guest_id' => $guestId,
+                'date' => $currentDate->toDateString(),
+                'outfit_id' => $outfit->id,
+                'occasion' => ucfirst($category) . ' day',
+                'notes' => 'Auto-generated ' . $category . ' outfit'
+            ]);
 
             $currentDate->addDay();
         }
@@ -212,14 +219,20 @@ class PlannerController extends Controller
     {
         $date = $request->input('date');
         $mixCategories = $request->input('mix_categories', true);
-        $guestId = session()->getId();
+        
+        // FIX: Use consistent guest_id
+        $guestId = session()->get('guest_id');
+    
+        // Find existing planner entry
+        $planner = Planner::where('guest_id', $guestId)
+            ->where('date', $date)
+            ->first();
 
         // Find existing planner entry
         $planner = Planner::where('guest_id', $guestId)
             ->where('date', $date)
             ->first();
 
-        // Determine category based on day of week
         $dayOfWeek = Carbon::parse($date)->dayOfWeek;
 
         // Default to casual
@@ -281,52 +294,37 @@ class PlannerController extends Controller
      * This version randomly selects from all available clothing items
      */
     private function createOutfit($guestId, $category, $clothes)
-    {
-        // Get all clothing IDs by type
-        $topIds = $clothes['tops']->pluck('id')->toArray();
-        $bottomIds = $clothes['bottoms']->pluck('id')->toArray();
+{
+    // Get all clothing IDs by type
+    $topIds = $clothes['tops']->pluck('id')->toArray();
+    $bottomIds = $clothes['bottoms']->pluck('id')->toArray();
 
-        // Shuffle to get random order
-        shuffle($topIds);
-        shuffle($bottomIds);
+    // Shuffle to get random order
+    shuffle($topIds);
+    shuffle($bottomIds);
 
-        // Create new outfit
-        $outfit = Outfit::create([
-            'guest_id' => $guestId,
-            'name' => ucfirst($category) . ' Outfit ' . now()->format('Y-m-d-H-i-s'),
-            'is_generated' => true,
-        ]);
+    // Create new outfit
+    $outfit = Outfit::create([
+        'guest_id' => $guestId,
+        'name' => ucfirst($category) . ' Outfit ' . now()->format('Y-m-d-H-i-s'),
+        'is_generated' => true,
+    ]);
 
-        // Choose 1-2 tops
-        $numTops = rand(1, min(2, count($topIds)));
-        $selectedTops = array_slice($topIds, 0, $numTops);
+    // Choose 1-2 tops
+    $numTops = rand(1, min(2, count($topIds)));
+    $selectedTops = array_slice($topIds, 0, $numTops);
 
-        // Choose 1-2 bottoms
-        $numBottoms = rand(1, min(2, count($bottomIds)));
-        $selectedBottoms = array_slice($bottomIds, 0, $numBottoms);
+    // Choose 1 bottom (assuming always 1 bottom is enough)
+    $selectedBottom = !empty($bottomIds) ? [$bottomIds[0]] : [];
 
-        // Prepare all clothing items to add
-        $clothingOutfitRows = [];
+    // Merge selected clothing item IDs
+    $selectedClothingIds = array_merge($selectedTops, $selectedBottom);
 
-        foreach ($selectedTops as $topId) {
-            $clothingOutfitRows[] = [
-                'outfit_id' => $outfit->id,
-                'clothing_id' => $topId
-            ];
-        }
+    // Attach clothes to the outfit
+    $outfit->clothes()->attach($selectedClothingIds);
 
-        foreach ($selectedBottoms as $bottomId) {
-            $clothingOutfitRows[] = [
-                'outfit_id' => $outfit->id,
-                'clothing_id' => $bottomId
-            ];
-        }
-
-        // Add clothes to outfit
-        DB::table('clothing_outfits')->insert($clothingOutfitRows);
-
-        return $outfit;
-    }
+    return $outfit;
+}
 
     /**
      * Store a newly created resource in storage.
@@ -344,7 +342,7 @@ class PlannerController extends Controller
         ]);
 
         // Update existing clothes
-        $clothIds = $request->input('cloth_ids', []);
+        $clothIds = $request->input('clothing_id', []);
         $clothNames = $request->input('cloth_names', []);
         $occasions = $request->input('occasions', []);
         $clothImages = $request->file('cloth_images', []);
@@ -364,8 +362,6 @@ class PlannerController extends Controller
             }
         }
 
-        // Handle new clothes (if using modalImagesInput)
-        // In PlannerController::save, when handling NEW images
         if ($request->hasFile('images')) {
             // ... (ensure $planner->outfit exists) ...
             foreach ($request->file('images') as $image) {
@@ -389,8 +385,6 @@ class PlannerController extends Controller
 
         return response()->json(['success' => true]);
     }
-
-
 
     /**
      * Display the specified resource.
