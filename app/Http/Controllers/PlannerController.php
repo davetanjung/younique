@@ -45,10 +45,16 @@ class PlannerController extends Controller
             $this->generateMonthlyOutfits($guestId, $startDate, $endDate);
         }
 
-        $plannerEntries = Planner::with(['outfit.clothes'])
-            ->where('guest_id', $guestId)
-            ->whereBetween('date', [$startDate, $endDate])
-            ->get();
+        $plannerEntries = Planner::with(['outfit.clothes']) // Eager load relationships
+        ->where('guest_id', $guestId)
+        ->whereBetween('date', [$startDate->toDateString(), $endDate->toDateString()])
+        ->orderBy('date', 'asc') // Optional, but good practice
+        ->get() // Get the results as a collection first
+        ->keyBy(function ($item) { // <--- THIS IS THE IMPORTANT PART
+            // Use Carbon to ensure the date from the DB is formatted correctly
+            // The return value of this function becomes the key in the final object
+            return Carbon::parse($item->date)->toDateString(); // Format as 'YYYY-MM-DD'
+        });
 
         return response()->json($plannerEntries);
     }
@@ -359,13 +365,24 @@ class PlannerController extends Controller
         }
 
         // Handle new clothes (if using modalImagesInput)
+        // In PlannerController::save, when handling NEW images
         if ($request->hasFile('images')) {
+            // ... (ensure $planner->outfit exists) ...
             foreach ($request->file('images') as $image) {
-                $path = $image->store('clothes', 'public');
-                $planner->outfit()->create([
-                    'image_url' => 'storage/' . $path,
+                // ... (get type/category) ...
+                $type = $request->input('new_image_type', 'unknown');
+                $category = $request->input('new_image_category', 'unknown');
+
+                // Store directly under 'clothes', not 'images/clothes'
+                $subPath = "clothes/{$type}"; // e.g., clothes/top
+                $storedPath = $image->store($subPath, 'public'); // Returns 'clothes/top/randomname.jpg'
+
+                $planner->outfit->clothes()->create([
+                    'guest_id' => $planner->guest_id,
                     'name' => 'New Cloth',
-                    'occasion' => 'General',
+                    'image_url' => 'storage/' . $storedPath, // Saves 'storage/clothes/top/randomname.jpg'
+                    'type' => $type,
+                    'category' => $category,
                 ]);
             }
         }
