@@ -145,7 +145,7 @@
             </div>
             @if (session('success'))
               <!-- Modal -->
-              <div id="success-modal" class="fixed inset-0 bg-gray-700/60 flex justify-center items-center z-50">
+              <div id="success-modal" class="fixed inset-0 bg-black/50 backdrop-filter backdrop-blur-[5px] flex justify-center items-center z-50">
                   <div class="bg-green-100 text-green-800 p-6 rounded-lg shadow-lg max-w-xs w-full animate__animated animate__fadeIn">
                       <div class="flex justify-between items-center">
                           <span class="font-semibold text-lg">Form succesfully submitted!</span>

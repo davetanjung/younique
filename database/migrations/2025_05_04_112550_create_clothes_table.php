@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('clothes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('name');
             $table->enum('category', ['casual', 'formal', 'sportswear', 'business', 'nightwear']);
+            $table->enum('type', ['top', 'bottom']);
             $table->string('color');
             $table->string('season')->nullable();
             $table->string('image_url')->nullable();
+            $table->string('guest_id')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');

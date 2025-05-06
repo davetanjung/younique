@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('outfits', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('name');
             $table->boolean('is_generated')->default(false);
+            $table->string('guest_id')->nullable();
             $table->timestamps();
         
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');

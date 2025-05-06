@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('planner_entries', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('outfit_id');
             $table->date('date');
             $table->string('occasion')->nullable();
             $table->text('notes')->nullable();
+            $table->string('guest_id')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
