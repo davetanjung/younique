@@ -76,6 +76,12 @@
                         class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-black/30" />
                 </div>
 
+                <div>
+                    <label for="outfitColor" class="block text-sm font-medium text-gray-700 mb-1">Outfit Color</label>
+                    <input type="text" id="outfitColor" name="color" value="{{ old('color') }}"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-black/30" />
+                </div>
+
                 {{-- Fields to specify Type and Category for NEW uploads --}}
                 {{-- These are REQUIRED for the backend 'save' function to work correctly --}}
                 <div class="grid grid-cols-2 gap-4">
@@ -86,10 +92,6 @@
                             class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-black/30">
                             <option value="top">Top</option>
                             <option value="bottom">Bottom</option>
-                            <option value="shoes">Shoes</option>
-                            <option value="accessory">Accessory</option>
-                            <option value="outerwear">Outerwear</option>
-                            <option value="unknown">Unknown</option>
                         </select>
                     </div>
                     <div>
@@ -104,6 +106,9 @@
                             <option value="nightwear">Nightwear</option>
                             <option value="unknown">Unknown</option>
                         </select>
+                    </div>
+                    <div>
+                        
                     </div>
                 </div>
 

@@ -336,54 +336,90 @@ class PlannerController extends Controller
 
     public function save(Request $request)
     {
-        $planner = Planner::firstOrCreate([
-            'date' => $request->input('date'),
-            'guest_id' => $request->input('guest_id'),
-        ]);
+        try {
+            $planner = Planner::firstOrCreate([
+                'date' => $request->input('date'),
+                'guest_id' => $request->input('guest_id'),
+            ]);
 
-        // Update existing clothes
-        $clothIds = $request->input('clothing_id', []);
-        $clothNames = $request->input('cloth_names', []);
-        $occasions = $request->input('occasions', []);
-        $clothImages = $request->file('cloth_images', []);
-
-        foreach ($clothIds as $index => $id) {
-            $cloth = Cloth::find($id);
-            if ($cloth && $cloth->outfit_id === $planner->outfit->id) {
-                $cloth->name = $clothNames[$index] ?? $cloth->name;
-                $planner->occasion = $occasions[$index] ?? $planner->occasion;
-
-                if (isset($clothImages[$index])) {
-                    $path = $clothImages[$index]->store('outfits', 'public');
-                    $cloth->image_url = 'storage/' . $path;
-                }
-
-                $cloth->save();
+            // Create outfit if it doesn't exist
+            if (!$planner->outfit_id || !$planner->outfit) {
+                $outfit = Outfit::create([
+                    'guest_id' => $planner->guest_id,
+                    'name' => $request->input('name', 'Custom Outfit'),
+                    'is_generated' => false,
+                ]);
+                $planner->outfit_id = $outfit->id;
+                $planner->save();
+            } else {
+                // Update existing outfit name
+                $planner->outfit->name = $request->input('name', $planner->outfit->name);
+                $planner->outfit->save();
             }
-        }
 
-        if ($request->hasFile('images')) {
-            // ... (ensure $planner->outfit exists) ...
-            foreach ($request->file('images') as $image) {
-                // ... (get type/category) ...
+            // Save occasion if provided (from the first occasion entry)
+            if (!empty($request->input('occasions')) && isset($request->input('occasions')[0])) {
+                $planner->occasion = $request->input('occasions')[0];
+                $planner->save();
+            }
+
+            // Update existing clothes
+            $clothIds = $request->input('clothing_id', []);
+            $clothNames = $request->input('cloth_names', []);
+            $clothImages = $request->file('cloth_images', []);
+
+            foreach ($clothIds as $index => $id) {
+                $cloth = Cloth::find($id);
+                if ($cloth) {
+                    $cloth->name = $clothNames[$index] ?? $cloth->name;
+                    
+                    if (isset($clothImages[$index])) {
+                        $path = $clothImages[$index]->store('outfits', 'public');
+                        $cloth->image_url = 'storage/' . $path;
+                    }
+
+                    $cloth->save();
+                }
+            }
+
+            // Handle new image uploads
+            if ($request->hasFile('images')) {
                 $type = $request->input('new_image_type', 'unknown');
                 $category = $request->input('new_image_category', 'unknown');
+                
+                foreach ($request->file('images') as $image) {
+                    $subPath = "clothes/{$type}"; // e.g., clothes/top
+                    $storedPath = $image->store($subPath, 'public');
 
-                // Store directly under 'clothes', not 'images/clothes'
-                $subPath = "clothes/{$type}"; // e.g., clothes/top
-                $storedPath = $image->store($subPath, 'public'); // Returns 'clothes/top/randomname.jpg'
-
-                $planner->outfit->clothes()->create([
-                    'guest_id' => $planner->guest_id,
-                    'name' => 'New Cloth',
-                    'image_url' => 'storage/' . $storedPath, // Saves 'storage/clothes/top/randomname.jpg'
-                    'type' => $type,
-                    'category' => $category,
-                ]);
+                    $planner->outfit->clothes()->create([
+                        'guest_id' => $planner->guest_id,
+                        'name' => 'New ' . ucfirst($type),
+                        'image_url' => 'storage/' . $storedPath,
+                        'type' => $type,
+                        'category' => $category,
+                    ]);
+                }
             }
-        }
 
-        return response()->json(['success' => true]);
+            // Fetch the updated planner entry with relationships for response
+            $updatedPlanner = Planner::with(['outfit.clothes'])
+                ->where('id', $planner->id)
+                ->first();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Outfit saved successfully',
+                'plannerEntry' => $updatedPlanner
+            ]);
+            
+        } catch (\Exception $e) {
+            \Log::error('Error saving outfit: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Error saving outfit',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**

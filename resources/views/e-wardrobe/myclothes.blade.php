@@ -4,7 +4,7 @@
 @section('styles')
     <link rel="stylesheet" href="{{ asset('/css/homepage.css') }}">
 @endsection --}}
-@vite('resources/css/app.css')
+
 @section('content')
     <div class="bg-[#f5efe4] min-h-screen p-10 w-full">
         <h1 class="text-3xl font-bold text-[#6b4b4b] mb-8">My Wardrobe</h1>
