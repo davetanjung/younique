@@ -18,7 +18,7 @@
                 Planner
              </a>             
                 <a href="/myclothes" class="relative text-gray-700 hover:text-gray-900 font-bold after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-gray-700 after:w-0 after:transition-all after:duration-500 hover:after:w-full {{ request()->routeIs('cloth.*') ? 'after:w-full' : '' }}">My Clothes</a>
-                <a href="/analyzer" class="text-gray-700 hover:text-gray-900 font-bold">Analyzer</a>
+                <a href="/stylist" class="relative text-gray-700 hover:text-gray-900 font-bold after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-gray-700 after:w-0 after:transition-all after:duration-500 hover:after:w-full {{ request()->routeIs('stylist.*') ? 'after:w-full' : '' }}">Analyzer</a>
             </div>
 
             <div class="w-1/3 flex justify-end items-center">                

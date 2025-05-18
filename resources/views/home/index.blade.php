@@ -61,104 +61,123 @@
         {{-- end about --}}
 
         {{-- subscription plan --}}
-        <div class="relative flex w-full mx-auto bg-[#FFEDD7] items-start justify-evenly">
-          <div class="flex flex-col justify-center items-center gap-12">
-            <span class="py-12 px-20 bg-[#F3D4B5] text-[#232323] shadow-xl rounded-3xl text-3xl">Fr<span class="underline decoration-[#BB8A5F] underline-offset-4">ee</span></span>  
-            <span class="text-[#FFEDD7] font-bold text-3xl">----</span>   
-            <div class="flex flex-col py-3 px-8 bg-white rounded-2xl shadow-xl gap-4 w-full">              
-              <div class="flex flex-wrap items-center max-w-full gap-2">
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M33 16.62V18C32.9982 21.2346 31.9508 24.382 30.014 26.9727C28.0773 29.5634 25.3549 31.4587 22.253 32.3758C19.1511 33.293 15.8359 33.1828 12.8017 32.0619C9.76752 30.9409 7.17698 28.8691 5.41644 26.1556C3.6559 23.442 2.81969 20.2321 3.03252 17.0045C3.24534 13.7768 4.49581 10.7045 6.59742 8.24559C8.69903 5.78671 11.5392 4.07305 14.6943 3.3602C17.8494 2.64734 21.1504 2.97349 24.105 4.28998" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M33 6L18 21.015L13.5 16.515" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                <span class="">Wardrobe digitization (up to 30 items)</span>                   
-              </div>   
-              <div class="flex flex-wrap items-center w-full gap-2">
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M33 16.62V18C32.9982 21.2346 31.9508 24.382 30.014 26.9727C28.0773 29.5634 25.3549 31.4587 22.253 32.3758C19.1511 33.293 15.8359 33.1828 12.8017 32.0619C9.76752 30.9409 7.17698 28.8691 5.41644 26.1556C3.6559 23.442 2.81969 20.2321 3.03252 17.0045C3.24534 13.7768 4.49581 10.7045 6.59742 8.24559C8.69903 5.78671 11.5392 4.07305 14.6943 3.3602C17.8494 2.64734 21.1504 2.97349 24.105 4.28998" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M33 6L18 21.015L13.5 16.515" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  <span class="">Outfit calendar</span>                                          
-              </div>  
-              <div class="flex flex-wrap items-center w-full gap-2">
-                <svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M19.5 35.75C28.4746 35.75 35.75 28.4746 35.75 19.5C35.75 10.5254 28.4746 3.25 19.5 3.25C10.5254 3.25 3.25 10.5254 3.25 19.5C3.25 28.4746 10.5254 35.75 19.5 35.75Z" stroke="#FF0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M24.375 14.625L14.625 24.375" stroke="#F71616" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M14.625 14.625L24.375 24.375" stroke="#F71616" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>                  
-                  <span class="">Free consultation with stylist</span>                     
-              </div>
-              </div>              
-          </div> 
-          <div class="flex flex-col justify-center items-center gap-12">
-            <span class="py-12 px-20 bg-[#F3D4B5] text-[#232323] shadow-xl rounded-3xl text-3xl">Premi<span class="underline decoration-[#BB8A5F] underline-offset-4">um</span></span>  
-            <span class="text-black font-bold text-3xl">Rp20k/month</span>   
-            <div class="flex flex-col py-3 px-8 bg-white rounded-2xl shadow-xl gap-4 w-full">              
-              <div class="flex flex-wrap items-center max-w-full gap-2">
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M33 16.62V18C32.9982 21.2346 31.9508 24.382 30.014 26.9727C28.0773 29.5634 25.3549 31.4587 22.253 32.3758C19.1511 33.293 15.8359 33.1828 12.8017 32.0619C9.76752 30.9409 7.17698 28.8691 5.41644 26.1556C3.6559 23.442 2.81969 20.2321 3.03252 17.0045C3.24534 13.7768 4.49581 10.7045 6.59742 8.24559C8.69903 5.78671 11.5392 4.07305 14.6943 3.3602C17.8494 2.64734 21.1504 2.97349 24.105 4.28998" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M33 6L18 21.015L13.5 16.515" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                <span class="">Wardrobe digitization (up to 50 items)</span>                   
-              </div>   
-              <div class="flex flex-wrap items-center w-full gap-2">
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M33 16.62V18C32.9982 21.2346 31.9508 24.382 30.014 26.9727C28.0773 29.5634 25.3549 31.4587 22.253 32.3758C19.1511 33.293 15.8359 33.1828 12.8017 32.0619C9.76752 30.9409 7.17698 28.8691 5.41644 26.1556C3.6559 23.442 2.81969 20.2321 3.03252 17.0045C3.24534 13.7768 4.49581 10.7045 6.59742 8.24559C8.69903 5.78671 11.5392 4.07305 14.6943 3.3602C17.8494 2.64734 21.1504 2.97349 24.105 4.28998" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M33 6L18 21.015L13.5 16.515" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  <span class="">Outfit calendar + history tracker</span>                                          
-              </div>  
-              <div class="flex flex-wrap items-center w-full gap-2">
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M33 16.62V18C32.9982 21.2346 31.9508 24.382 30.014 26.9727C28.0773 29.5634 25.3549 31.4587 22.253 32.3758C19.1511 33.293 15.8359 33.1828 12.8017 32.0619C9.76752 30.9409 7.17698 28.8691 5.41644 26.1556C3.6559 23.442 2.81969 20.2321 3.03252 17.0045C3.24534 13.7768 4.49581 10.7045 6.59742 8.24559C8.69903 5.78671 11.5392 4.07305 14.6943 3.3602C17.8494 2.64734 21.1504 2.97349 24.105 4.28998" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M33 6L18 21.015L13.5 16.515" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  <span class="">Event-based outfit planner</span>   
-              </div>
-              <div class="flex flex-wrap items-center w-full gap-2">
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M33 16.62V18C32.9982 21.2346 31.9508 24.382 30.014 26.9727C28.0773 29.5634 25.3549 31.4587 22.253 32.3758C19.1511 33.293 15.8359 33.1828 12.8017 32.0619C9.76752 30.9409 7.17698 28.8691 5.41644 26.1556C3.6559 23.442 2.81969 20.2321 3.03252 17.0045C3.24534 13.7768 4.49581 10.7045 6.59742 8.24559C8.69903 5.78671 11.5392 4.07305 14.6943 3.3602C17.8494 2.64734 21.1504 2.97349 24.105 4.28998" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M33 6L18 21.015L13.5 16.515" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  <span class="">2x free consultation with stylist in a month</span>                     
-              </div>
-              </div>              
-          </div>
-          <div class="flex flex-col justify-center items-center gap-12">
-            <span class="py-12 px-20 bg-[#F3D4B5] text-[#232323] shadow-xl rounded-3xl text-3xl">Premi<span class="underline decoration-[#BB8A5F] underline-offset-4">um+</span></span> 
-            <span class="text-black font-bold text-3xl">Rp50k/month</span>
-            <div class="flex flex-col py-3 px-8 bg-white rounded-2xl shadow-xl gap-4 w-full">              
-              <div class="flex flex-wrap items-center max-w-full gap-2">
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M33 16.62V18C32.9982 21.2346 31.9508 24.382 30.014 26.9727C28.0773 29.5634 25.3549 31.4587 22.253 32.3758C19.1511 33.293 15.8359 33.1828 12.8017 32.0619C9.76752 30.9409 7.17698 28.8691 5.41644 26.1556C3.6559 23.442 2.81969 20.2321 3.03252 17.0045C3.24534 13.7768 4.49581 10.7045 6.59742 8.24559C8.69903 5.78671 11.5392 4.07305 14.6943 3.3602C17.8494 2.64734 21.1504 2.97349 24.105 4.28998" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M33 6L18 21.015L13.5 16.515" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                <span class="">Unlimited Wardrobe digitization</span>                   
-              </div>   
-              <div class="flex flex-wrap items-center w-full gap-2">
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M33 16.62V18C32.9982 21.2346 31.9508 24.382 30.014 26.9727C28.0773 29.5634 25.3549 31.4587 22.253 32.3758C19.1511 33.293 15.8359 33.1828 12.8017 32.0619C9.76752 30.9409 7.17698 28.8691 5.41644 26.1556C3.6559 23.442 2.81969 20.2321 3.03252 17.0045C3.24534 13.7768 4.49581 10.7045 6.59742 8.24559C8.69903 5.78671 11.5392 4.07305 14.6943 3.3602C17.8494 2.64734 21.1504 2.97349 24.105 4.28998" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M33 6L18 21.015L13.5 16.515" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  <span class="">Outfit calendar + history tracker</span>                                          
-              </div>  
-              <div class="flex flex-wrap items-center w-full gap-2">
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M33 16.62V18C32.9982 21.2346 31.9508 24.382 30.014 26.9727C28.0773 29.5634 25.3549 31.4587 22.253 32.3758C19.1511 33.293 15.8359 33.1828 12.8017 32.0619C9.76752 30.9409 7.17698 28.8691 5.41644 26.1556C3.6559 23.442 2.81969 20.2321 3.03252 17.0045C3.24534 13.7768 4.49581 10.7045 6.59742 8.24559C8.69903 5.78671 11.5392 4.07305 14.6943 3.3602C17.8494 2.64734 21.1504 2.97349 24.105 4.28998" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M33 6L18 21.015L13.5 16.515" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  <span class="">Event-based outfit planner</span>                     
-              </div>
-              <div class="flex flex-wrap items-center w-full gap-2">
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M33 16.62V18C32.9982 21.2346 31.9508 24.382 30.014 26.9727C28.0773 29.5634 25.3549 31.4587 22.253 32.3758C19.1511 33.293 15.8359 33.1828 12.8017 32.0619C9.76752 30.9409 7.17698 28.8691 5.41644 26.1556C3.6559 23.442 2.81969 20.2321 3.03252 17.0045C3.24534 13.7768 4.49581 10.7045 6.59742 8.24559C8.69903 5.78671 11.5392 4.07305 14.6943 3.3602C17.8494 2.64734 21.1504 2.97349 24.105 4.28998" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M33 6L18 21.015L13.5 16.515" stroke="#49B625" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  <span class="">Free consultation with stylist</span>                     
-              </div>
-              </div>              
-          </div>
-        </div>  
+        <div class="flex flex-col md:flex-row w-full px-48 gap-6 p-8 bg-[#FFEDD7]">
+  <!-- Free Plan -->
+  <div class="flex-1 flex flex-col bg-white rounded-3xl shadow-xl overflow-hidden transition-transform hover:scale-105 duration-300">
+    <div class="bg-[#F3D4B5] py-10 px-6 text-center">
+      <h2 class="text-3xl font-bold text-[#232323]">Fr<span class="underline decoration-[#BB8A5F] underline-offset-4">ee</span></h2>
+    </div>
+    <div class="h-16 flex items-center justify-center font-bold text-2xl">
+      <span>Free Forever</span>
+    </div>
+    <div class="flex-1 p-6 flex flex-col gap-4">
+      <div class="flex items-center gap-3">
+        <svg class="w-6 h-6 text-[#49B625] flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span class="text-gray-800">Wardrobe digitization (up to 30 items)</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <svg class="w-6 h-6 text-[#49B625] flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span class="text-gray-800">Outfit calendar</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <svg class="w-6 h-6 text-[#F71616] flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        <span class="text-gray-800">Free consultation with stylist</span>
+      </div>
+      <div class="mt-auto pt-6">
+        <button class="w-full bg-gray-200 text-gray-600 py-3 rounded-xl font-medium">Current Plan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Premium Plan -->
+  <div class="flex-1 flex flex-col bg-white rounded-3xl shadow-xl overflow-hidden transition-transform hover:scale-105 duration-300 border-2 border-[#BB8A5F]">
+    <div class="bg-[#F3D4B5] py-10 px-6 text-center relative">
+      <span class="absolute top-0 right-0 bg-[#BB8A5F] text-white text-xs px-3 py-1 rounded-bl-lg font-medium">POPULAR</span>
+      <h2 class="text-3xl font-bold text-[#232323]">Premi<span class="underline decoration-[#BB8A5F] underline-offset-4">um</span></h2>
+    </div>
+    <div class="h-16 flex items-center justify-center font-bold text-2xl">
+      <span>Rp20k/month</span>
+    </div>
+    <div class="flex-1 p-6 flex flex-col gap-4">
+      <div class="flex items-center gap-3">
+        <svg class="w-6 h-6 text-[#49B625] flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span class="text-gray-800">Wardrobe digitization (up to 50 items)</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <svg class="w-6 h-6 text-[#49B625] flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span class="text-gray-800">Outfit calendar + history tracker</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <svg class="w-6 h-6 text-[#49B625] flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span class="text-gray-800">Event-based outfit planner</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <svg class="w-6 h-6 text-[#49B625] flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span class="text-gray-800">2x free consultation with stylist in a month</span>
+      </div>
+      <div class="mt-auto pt-6">
+        <button class="w-full bg-[#BB8A5F] hover:bg-[#A07A50] text-white py-3 rounded-xl font-medium transition-colors duration-300">
+          Buy Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Premium+ Plan -->
+  <div class="flex-1 flex flex-col bg-white rounded-3xl shadow-xl overflow-hidden transition-transform hover:scale-105 duration-300">
+    <div class="bg-[#F3D4B5] py-10 px-6 text-center">
+      <h2 class="text-3xl font-bold text-[#232323]">Premi<span class="underline decoration-[#BB8A5F] underline-offset-4">um+</span></h2>
+    </div>
+    <div class="h-16 flex items-center justify-center font-bold text-2xl">
+      <span>Rp50k/month</span>
+    </div>
+    <div class="flex-1 p-6 flex flex-col gap-4">
+      <div class="flex items-center gap-3">
+        <svg class="w-6 h-6 text-[#49B625] flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span class="text-gray-800">Unlimited Wardrobe digitization</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <svg class="w-6 h-6 text-[#49B625] flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span class="text-gray-800">Outfit calendar + history tracker</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <svg class="w-6 h-6 text-[#49B625] flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span class="text-gray-800">Event-based outfit planner</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <svg class="w-6 h-6 text-[#49B625] flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span class="text-gray-800">Free consultation with stylist</span>
+      </div>
+      <div class="mt-auto pt-6">
+        <button class="w-full bg-[#BB8A5F] hover:bg-[#A07A50] text-white py-3 rounded-xl font-medium transition-colors duration-300">
+          Buy Now
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
          {{-- end subscription plan --}}     
 
          {{-- form --}}

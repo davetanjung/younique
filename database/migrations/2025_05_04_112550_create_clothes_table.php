@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('name');
             $table->enum('category', ['casual', 'formal', 'sportswear', 'business', 'nightwear']);
-            $table->enum('type', ['top', 'bottom']);
+            $table->enum('type', ['top', 'bottom', 'dress']);
             $table->string('color');
             $table->string('season')->nullable();
             $table->string('image_url')->nullable();

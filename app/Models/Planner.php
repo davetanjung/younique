@@ -12,16 +12,18 @@ class Planner extends Model
     protected $table = 'planner_entries';
 
     protected $fillable = [
-        'user_id',     
+        'user_id',
         'outfit_id',
         'date',
         'occasion',
         'notes',
-        'guest_id',     
+        'guest_id',
     ];
 
-    public function outfit(){
+    public function outfit()
+    {
         return $this->belongsTo(Outfit::class);
     }
+
 
 }
